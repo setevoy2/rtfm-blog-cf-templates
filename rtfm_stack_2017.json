@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "AWS CloudFormation Template EC2",
+  "Description" : "AWS CloudFormation template for https://rtfm.co.ua blog stack.",
 
   "Parameters" : {
 
