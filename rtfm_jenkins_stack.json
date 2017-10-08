@@ -49,6 +49,12 @@
       "Description": "AZ for Jenkins EC2, must be same as Workspaces EBS",
       "Type": "String",
       "Default": "eu-west-1a"
+    },
+
+    "ENV": {
+      "Description": "Environment type. rtfm-dev or rtfm-production.",
+      "Type": "String",
+      "Default": "rtfm-ci"
     }
 
   },
@@ -59,9 +65,8 @@
       "Properties" : {
         "AvailabilityZone" : { "Ref" : "JenkinsAvailabilityZone" },
         "Tags" : [
-          {
-            "Key" : "Name", "Value" : "rtfm_jenkins"
-          }
+            {"Key" : "Name", "Value" : { "Fn::Join" : [ "-", [ {"Ref" : "AWS::StackName"}, "ec2"] ] } },
+            {"Key" : "Env", "Value" : {"Ref" : "ENV"} }
         ],
         "InstanceType" : { "Ref" : "InstanceType" },
         "SecurityGroups" : [
@@ -84,9 +89,8 @@
       "Type" : "AWS::EC2::SecurityGroup",
       "Properties" : {
         "Tags" : [
-          {
-            "Key" : "Name", "Value" : "rtfm_jenkins"
-          }
+          {"Key" : "Name", "Value" : { "Fn::Join" : [ "-", [ {"Ref" : "AWS::StackName"}, "sg"] ] } },
+          {"Key" : "Env", "Value" : {"Ref" : "ENV"} }
         ],
         "GroupDescription" : "Enable SSH access via port 22",
         "SecurityGroupIngress" : [
