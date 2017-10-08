@@ -6,7 +6,7 @@ Blog: https://rtfm.co.ua
 
 **Description**
 
-Will provision AWS EC2 t2.nano (default) instance and attach existing EBS with Jenkins data as /dev/xvdb.
+Will provision AWS EC2 t2.nano (default) instance and attach existing EBS with Jenkins data as `/dev/xvdb`.
 
 ### rtfm_stack_2017.json RTFM blog stack provisioning
 
