@@ -453,7 +453,14 @@
         "InstanceId": {"Ref" : "BastionEC2Instance"}
       }
     }
+  },
 
+  "Outputs" : {
+    "PublicIP" : {
+      "Description" : "Public IP address of the Bastion EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "BastionEC2Instance", "PublicIp" ] }
+    }
   }
+
 }
 
