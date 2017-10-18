@@ -170,30 +170,10 @@
        }
     },
 
-    "NatGwIPAddress" : {
-      "Type" : "AWS::EC2::EIP",
-      "Properties" : {
-        "Domain" : "vpc"
-      }
-    },
-
     "BastionIPAddress" : {
       "Type" : "AWS::EC2::EIP",
       "Properties" : {
         "Domain" : "vpc"
-      }
-    },
-
-    "NAT" : {
-      "DependsOn" : "NatGwIPAddress",
-      "Type" : "AWS::EC2::NatGateway",
-      "Properties" : {
-        "AllocationId" : { "Fn::GetAtt" : ["NatGwIPAddress", "AllocationId"]},
-        "SubnetId" : { "Ref" : "PublicSubnet"},
-        "Tags" : [
-          {"Key" : "Name", "Value" : { "Fn::Join" : [ "-", [ {"Ref" : "AWS::StackName"}, "natgw"] ] } },
-          {"Key" : "Env", "Value" : {"Ref" : "ENV"} }
-        ]
       }
     },
 
@@ -251,8 +231,8 @@
           "Ref": "PrivateRouteTable"
         },
         "DestinationCidrBlock": "0.0.0.0/0",
-        "NatGatewayId": {
-          "Ref": "NAT"
+        "InstanceId": {
+          "Ref": "BastionEC2Instance"
         }
       }
     },
