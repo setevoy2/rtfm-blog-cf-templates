@@ -226,6 +226,7 @@
 
     "PrivateRoute": {
       "Type": "AWS::EC2::Route",
+      "DependsOn" : "BastionEC2Instance",
       "Properties": {
         "RouteTableId": {
           "Ref": "PrivateRouteTable"
