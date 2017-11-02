@@ -366,7 +366,8 @@
            "VolumeId" : { "Ref" : "BastionEBSID" },
            "Device" : "/dev/xvdb"
           }
-        ]
+        ],
+        "SourceDestCheck": "false"
       }
     },
 
