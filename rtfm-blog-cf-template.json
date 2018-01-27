@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "AWS CloudFormation template for https://rtfm.co.ua blog stack.",
+  "Description" : "AWS CloudFormation stack for https://rtfm.co.ua blog",
 
   "Parameters" : {
 
@@ -287,23 +287,51 @@
             "FromPort" : "8",
             "ToPort" : "-1",
             "CidrIp" : { "Ref" : "HomeAllowLocation"}
-          },
-
-          {
-            "IpProtocol" : "tcp",
-            "FromPort" : "*",
-            "ToPort" : "(",
-            "SourceSecurityGroupId" : { "Ref" : "ServicesSecurityGroup"}
-          },
-
-          {
-            "IpProtocol" : "tcp",
-            "FromPort" : "*",
-            "ToPort" : "(",
-            "SourceSecurityGroupId" : { "Ref" : "DBSecurityGroup"}
           }
 
         ]
+      }
+    },
+
+    "DBAllowInboundRule": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties":{
+        "IpProtocol": "tcp",
+        "FromPort": "0",
+        "ToPort": "65535",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "DBSecurityGroup",
+            "GroupId"
+          ]
+        },
+        "GroupId": {
+          "Fn::GetAtt": [
+            "BastionSecurityGroup",
+            "GroupId"
+          ]
+        }
+      }
+    },
+
+    "ServicesAllowInboundRule": {
+      "Type": "AWS::EC2::SecurityGroupIngress",
+      "Properties":{
+        "IpProtocol": "tcp",
+        "FromPort": "0",
+        "ToPort": "65535",
+        "SourceSecurityGroupId": {
+          "Fn::GetAtt": [
+            "ServicesSecurityGroup",
+            "GroupId"
+          ]
+        },
+        "GroupId": {
+          "Fn::GetAtt": [
+            "BastionSecurityGroup",
+            "GroupId"
+          ]
+        }
       }
     },
 
