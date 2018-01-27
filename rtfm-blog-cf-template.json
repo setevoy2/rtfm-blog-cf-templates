@@ -476,9 +476,17 @@
   },
 
   "Outputs" : {
-    "PublicIP" : {
+    "BastionPublicIP" : {
       "Description" : "Public IP address of the Bastion EC2 instance",
       "Value" : { "Fn::GetAtt" : [ "BastionEC2Instance", "PublicIp" ] }
+    },
+    "ServicesPrivateIP" : {
+      "Description" : "Public IP address of the Bastion EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "BastionEC2Instance", "PrivateIp" ] }
+    },
+    "DBPrivateIP" : {
+      "Description" : "Public IP address of the Bastion EC2 instance",
+      "Value" : { "Fn::GetAtt" : [ "DBEC2Instance", "PrivateIp" ] }
     }
   }
 
