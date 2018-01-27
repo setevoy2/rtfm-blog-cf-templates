@@ -481,11 +481,11 @@
       "Value" : { "Fn::GetAtt" : [ "BastionEC2Instance", "PublicIp" ] }
     },
     "ServicesPrivateIP" : {
-      "Description" : "Public IP address of the Bastion EC2 instance",
+      "Description" : "Private IP address of the Services EC2 instance",
       "Value" : { "Fn::GetAtt" : [ "ServicesEC2Instance", "PrivateIp" ] }
     },
     "DBPrivateIP" : {
-      "Description" : "Public IP address of the Bastion EC2 instance",
+      "Description" : "Private IP address of the DB EC2 instance",
       "Value" : { "Fn::GetAtt" : [ "DBEC2Instance", "PrivateIp" ] }
     }
   }
