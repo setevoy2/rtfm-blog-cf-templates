@@ -296,9 +296,7 @@
     "DBAllowInboundRule": {
       "Type": "AWS::EC2::SecurityGroupIngress",
       "Properties":{
-        "IpProtocol": "tcp",
-        "FromPort": "0",
-        "ToPort": "65535",
+        "IpProtocol": "-1",
         "SourceSecurityGroupId": {
           "Fn::GetAtt": [
             "DBSecurityGroup",
@@ -317,9 +315,7 @@
     "ServicesAllowInboundRule": {
       "Type": "AWS::EC2::SecurityGroupIngress",
       "Properties":{
-        "IpProtocol": "tcp",
-        "FromPort": "0",
-        "ToPort": "65535",
+        "IpProtocol": "-1",
         "SourceSecurityGroupId": {
           "Fn::GetAtt": [
             "ServicesSecurityGroup",
