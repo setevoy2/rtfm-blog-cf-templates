@@ -5,6 +5,11 @@
 
   "Parameters" : {
 
+    "JenkinsIP": {
+      "Description": "VPC CidrBlock",
+      "Type": "String"
+    },
+
     "VPCCIDRBlock": {
       "Description": "VPC CidrBlock",
       "Type": "String",
@@ -258,35 +263,47 @@
           {"Key" : "Env", "Value" : {"Ref" : "ENV"} }
         ],
         "VpcId" : {"Ref" : "VPC"},
-        "GroupDescription" : "Enable SSH, HTTP/S, ICMP access from home",
+        "GroupDescription" : "Enable access to the Bastion",
         "SecurityGroupIngress" : [
 
           {
             "IpProtocol" : "tcp",
             "FromPort" : "22",
             "ToPort" : "22",
-            "CidrIp" : { "Ref" : "HomeAllowLocation"}
+            "CidrIp" : { "Ref" : "JenkinsIP"},
+            "Description": "Jenkins/Ansible SSH"
+          },
+
+          {
+            "IpProtocol" : "tcp",
+            "FromPort" : "22",
+            "ToPort" : "22",
+            "CidrIp" : { "Ref" : "HomeAllowLocation"},
+            "Description": "Home SSH"
           },
 
           {
             "IpProtocol" : "tcp",
             "FromPort" : "80",
             "ToPort" : "80",
-            "CidrIp" : "0.0.0.0/0"
+            "CidrIp" : "0.0.0.0/0",
+            "Description": "All HTTP"
           },
 
           {
             "IpProtocol" : "tcp",
             "FromPort" : "443",
             "ToPort" : "443",
-            "CidrIp" : "0.0.0.0/0"
+            "CidrIp" : "0.0.0.0/0",
+            "Description": "All HTTPS"
           },
 
           {
             "IpProtocol" : "icmp",
             "FromPort" : "8",
             "ToPort" : "-1",
-            "CidrIp" : { "Ref" : "HomeAllowLocation"}
+            "CidrIp" : { "Ref" : "HomeAllowLocation"},
+            "Description": "Home ping"
           }
 
         ]
@@ -297,6 +314,7 @@
       "Type": "AWS::EC2::SecurityGroupIngress",
       "Properties":{
         "IpProtocol": "-1",
+        "Description": "Allow all from DB",
         "SourceSecurityGroupId": {
           "Fn::GetAtt": [
             "DBSecurityGroup",
@@ -316,6 +334,7 @@
       "Type": "AWS::EC2::SecurityGroupIngress",
       "Properties":{
         "IpProtocol": "-1",
+        "Description": "Allow all from Services",
         "SourceSecurityGroupId": {
           "Fn::GetAtt": [
             "ServicesSecurityGroup",
@@ -346,7 +365,8 @@
             "IpProtocol" : "tcp",
             "FromPort" : "22",
             "ToPort" : "22",
-            "SourceSecurityGroupId" : { "Ref" : "BastionSecurityGroup" }
+            "SourceSecurityGroupId" : { "Ref" : "BastionSecurityGroup" },
+            "Description": "Allow SSH from Bastion"
           }
 
         ]
@@ -368,14 +388,16 @@
             "IpProtocol" : "tcp",
             "FromPort" : "22",
             "ToPort" : "22",
-            "SourceSecurityGroupId" : { "Ref" : "BastionSecurityGroup" }
+            "SourceSecurityGroupId" : { "Ref" : "BastionSecurityGroup" },
+            "Description": "Allow SSH from Bastion"
           },
 
           {
             "IpProtocol" : "tcp",
             "FromPort" : "22",
             "ToPort" : "22",
-            "SourceSecurityGroupId" : { "Ref" : "ServicesSecurityGroup" }
+            "SourceSecurityGroupId" : { "Ref" : "ServicesSecurityGroup" },
+            "Description": "Allow SSH from Services"
           }
 
         ]
