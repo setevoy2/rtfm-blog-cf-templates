@@ -2,13 +2,15 @@
 
 Blog: https://rtfm.co.ua
 
-### rtfm_jenkins_stack.json - Jenkins CI stack provisioning
+### Files
+
+[rtfm-jenkins-stack.json](https://github.com/setevoy2/rtfm-blog-cf-templates/blob/master/rtfm-jenkins-stack.json) - Jenkins CI stack provisioning
 
 **Description**
 
-Will provision AWS EC2 t2.nano (default) instance and attach existing EBS with Jenkins data as `/dev/xvdb`.
+Will provision AWS EC2 t2.micro (default) instance and attach existing EBS with Jenkins data as `/dev/xvdb`.
 
-### rtfm_stack_2017.json RTFM blog stack provisioning
+[rtfm-blog-cf-template.json](https://github.com/setevoy2/rtfm-blog-cf-templates/blob/master/rtfm-blog-cf-template.json) RTFM blog stack provisioning
 
 **Description**
 
