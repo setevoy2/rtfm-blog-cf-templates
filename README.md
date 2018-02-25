@@ -4,22 +4,16 @@ Blog: https://rtfm.co.ua
 
 ### Files
 
-[rtfm-jenkins-stack.json](https://github.com/setevoy2/rtfm-blog-cf-templates/blob/master/rtfm-jenkins-stack.json) - Jenkins CI stack provisioning
-
-**Description**
-
+* [rtfm-jenkins-stack.json](https://github.com/setevoy2/rtfm-blog-cf-templates/blob/master/rtfm-jenkins-stack.json) - Jenkins CI stack provisioning
 Will provision AWS EC2 t2.micro (default) instance and attach existing EBS with Jenkins data as `/dev/xvdb`.
 
-[rtfm-blog-cf-template.json](https://github.com/setevoy2/rtfm-blog-cf-templates/blob/master/rtfm-blog-cf-template.json) RTFM blog stack provisioning
-
-**Description**
-
+* [rtfm-blog-cf-template.json](https://github.com/setevoy2/rtfm-blog-cf-templates/blob/master/rtfm-blog-cf-template.json) RTFM blog stack provisioning
 Will create CloudFormation stack with:
 
-* VPC
+..* VPC
   * Public subnet
   * Private subnet
-* EC2
+..* EC2
   * Bastion host in Public subnet
   * Services host in Private subnet
   * DB host in Private subnet
